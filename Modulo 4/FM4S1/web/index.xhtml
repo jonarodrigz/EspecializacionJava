@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ejemplo para suma de dos muneros</title>
+    </h:head>
+    <h:body>
+        Ejemplo 1
+        <f:view>
+            <h:panelGroup id="Ejemplo1" rendered="#{pruebaBean.estado}">
+                <h:form>
+                    <h:inputText value="#{pruebaBean.op1}"/><br/>
+                    <h:inputText value="#{pruebaBean.op2}"/><br/>
+                    <h:inputText id="resultado" value="#{pruebaBean.r}" readonly="true"/><br/>
+                    <h:message for="resultado"/>
+                    <h:commandButton value="Aceptar" action="#{pruebaBean.Suma()}"/>
+                </h:form>
+            </h:panelGroup>
+            <h:panelGroup id="Ejemplo2" rendered="#{!pruebaBean.estado}">
+                
+            </h:panelGroup>
+</html>
+

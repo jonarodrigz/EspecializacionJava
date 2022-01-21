@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+       Productos
+       <h:panelGroup>
+           <h:form id="form">
+               <p:toolbarGroup>
+                   <p:commandButton value="Agregar Producto"
+                                    actionListener="#{mBProductos.nuevo()}"
+                                    oncomplete="PF('DialogoProducto').show()"
+                                    update=":form:ProductoContent"></p:commandButton>
+                   <a href="reporteProductos">Generar Reporte</a>
+               </p:toolbarGroup>
+               <p:dataTable id="dtProducto" var="itemProducto" value="#{mBProductos.listPro}" rowKey="#{itemProducto.idproductos}">
+                   <p:column headerText="Codigo">
+                       <h:outputText value="#{itemProducto.idproductos}"/>
+                   </p:column>
+                     <p:column headerText="Nombre">
+                         <h:outputText value="#{itemProducto.nombre}"/>
+                   </p:column>
+                     <p:column headerText="Apellido">
+                         <h:outputText value="#{itemProducto.precio}"/>
+                   </p:column>
+                    <p:column>
+                         <p:commandButton
+                             onclick="PF('DialogoProducto').show()"
+                             update=":form:ProductoContent"
+                             value="Modificar">
+                             <f:setPropertyActionListener value="#{itemProducto}"
+                                                          target="#{mBProductos.productoSeleccionado}"/>
+                         </p:commandButton>
+                   </p:column>
+                   <p:column>
+                         <p:commandButton 
+                             onclick="PF('eliminarDialogoProducto').show()"
+                             update=":form:ProductoContent"
+                             value="Eliminar">
+                                  <f:setPropertyActionListener value="#{itemProducto}"
+                                                          target="#{mBProductos.productoSeleccionado}"/>
+                         </p:commandButton>
+                   </p:column>
+               </p:dataTable>
+               
+               <p:dialog header="Productos" widgetVar="DialogoProducto" showEffect="fade" modal="true">
+                   <p:outputPanel id="ProductoContent">
+                       <p:outputPanel rendered="#{not empty mBProductos.productoSeleccionado}">
+                           <div class="p-field">
+                               <p:outputLabel for="idProducto">Id</p:outputLabel>
+                               <p:inputText id="idProducto" value="#{mBProductos.productoSeleccionado.idproductos}"/>
+                           </div>
+                            <div class="p-field">
+                               <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                               <p:inputText id="nombre" value="#{mBProductos.productoSeleccionado.nombre}"/>
+                           </div>
+                            <div class="p-field">
+                               <p:outputLabel for="precio">Precio</p:outputLabel>
+                               <p:inputText id="precio" value="#{mBProductos.productoSeleccionado.precio}"/>
+                           </div>
+                       </p:outputPanel>
+                   </p:outputPanel>
+                   <f:facet name="footer">
+                       <p:commandButton value="Guardar" actionListener="#{mBProductos.guardar()}"/>
+                       <p:commandButton value="Cancelar" onclick="PF('DialogoProducto').hide()"/>
+                   </f:facet>
+               </p:dialog>
+               
+               <p:confirmDialog widgetVar="eliminarDialogoProducto" showEffect="fade" width="300"
+                   message="Eliminar producto" header="Confimacion">
+                   <p:commandButton value="Si" actionListener="#{mBProductos.eliminar(mBProductos.productoSeleccionado.idproductos)}"
+                                    oncomplete="PF('eliminarDialogoProducto').hide()"></p:commandButton>                    
+                   <p:commandButton value="No" onclick="PF('eliminarDialogoProducto').hide()"></p:commandButton>
+               </p:confirmDialog>
+           </h:form>
+       </h:panelGroup>
+    </h:body>
+</html>
+
