@@ -1,5 +1,5 @@
 # EspecializacionJava
-Ejercicios practicos desarrollados en la Especialización de Java impartido por FORMAS e INSAFORS
+Ejercicios practicos desarrollados en la Especialización de Java impartido por FORMAS e INSAFORD
 
 ## Modulo 1: Introducción al desarrollo de software en Java 
 Contenido:
